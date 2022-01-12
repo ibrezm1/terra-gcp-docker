@@ -18,7 +18,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("../secure/zeta-yen-319702-2077ec417b20.json")
+  credentials = file("../zeta-yen-319702-2077ec417b20.json")
 
   project = "zeta-yen-319702"
   region  = "us-central1"
