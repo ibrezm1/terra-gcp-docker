@@ -18,7 +18,8 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("../zeta-yen-319702-2077ec417b20.json")
+  # Providing local credential variables is safer
+  #credentials = file("../zeta-yen-319702-2077ec417b20.json")
 
   project = "zeta-yen-319702"
   region  = "us-central1"
@@ -56,18 +57,19 @@ resource "google_compute_instance" "vm_instance" {
       private_key = file(local.gce_ssh_key_file)
     }
 
-  provisioner "file" {
-    source      = "install-shellscript.sh"
-    destination = "/tmp/script.sh"
-  }
+    provisioner "file" {
+        source = "./scripts"
+        destination = "/tmp"
+    }
 
-  
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/script.sh",
-      "sudo /tmp/script.sh args",
-    ]
-  }
+    provisioner "remote-exec" {
+        inline = [
+            "chmod +x /tmp/scripts/*.sh",
+            "sudo /tmp/scripts/install-docker.sh",
+           # "sudo /tmp/scripts/install-concorse.sh",
+           
+        ]
+    }
 
   #metadata_startup_script = "echo hi > /tmp/test.txt"
   #metadata_startup_script = file("./test.sh")
