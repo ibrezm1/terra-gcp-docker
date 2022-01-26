@@ -1,13 +1,5 @@
 sudo apt-get install cf-cli
 
-# Download Docker Compose, move it to usr bin and make executable
-curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-docker-compose --version
-
-
-
 # Download the Concourse Compose yaml and rename to a file which Compose with recognize
 cd /tmp
 wget -O docker-compose.yml https://concourse-ci.org/docker-compose.yml
