@@ -62,6 +62,11 @@ resource "google_compute_instance" "vm_instance" {
         destination = "/tmp"
     }
 
+    provisioner "file" {
+        source = "../keys"
+        destination = "/tmp"
+    }
+
     provisioner "remote-exec" {
         inline = [
             "chmod +x /tmp/scripts/*.sh",
